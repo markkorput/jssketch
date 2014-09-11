@@ -17,37 +17,10 @@
     };
 
     App.prototype.setup = function() {
-      var canvas, test_func,
-        _this = this;
-      this.controls = new Controls();
-      this.controls.on('toggle-playing', function(val) {
-        if (val) {
-          return paper.view.play();
-        } else {
-          paper.view.pause();
-          return console.log('paused');
-        }
-      });
+      var canvas;
       canvas = document.getElementById('targetCanvas');
       paper.setup(canvas);
-      paper.view.on('frame', function() {
-        return TWEEN.update();
-      });
-      this.waveSiners = [new WaveSiner(), new WaveSiner(), new WaveSiner(), new WaveSiner(), new WaveSiner(), new WaveSiner()];
-      this.rect = new paper.Rectangle(0, 0, 10, 10);
-      this.rect.stroke;
-      $('canvas').mousedown(function(e) {
-        _this.waveOps.drip(new paper.Point(e.offsetX, e.offsetY));
-        return _this.waveOps2.drip(new paper.Point(paper.view.size.width - e.offsetX, paper.view.size.height - e.offsetY));
-      });
-      return;
-      test_func = function() {
-        var pos;
-        pos = new paper.Point(Math.random() * paper.view.viewSize.width, paper.view.viewSize.height * 0.5);
-        _this.waveOps.drip(pos, Math.random() * 30);
-        return setTimeout(test_func, 1000);
-      };
-      return setTimeout(test_func, 300);
+      return this.sketcher = new Sketcher();
     };
 
     return App;
